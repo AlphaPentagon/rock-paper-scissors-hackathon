@@ -54,13 +54,27 @@ function displayOutcome(outcome){
 
 //Calls all needed functions
 function main(){
-
-    let input = getPlayerInput();
-    let result = getWinner(input, "rock");
+    let playerMove = getPlayerInput();
+    let computerMove = getComputerInput();
+    let result = getWinner(playerMove, computerMove);
     displayOutcome(result);
 
 };
 
+// Ticket 4
+
+// Generates a random computer move
+function getComputerInput() {
+    let computerMoves = ["rock", "paper", "scissors"];   
+    let randomNum = Math.floor(Math.random() * 3);
+    console.log(computerMoves[randomNum]); // This is so we can view the computerMove in the console for testing
+    return computerMoves[randomNum];
+}
+
 //runs the program
 main();
+
+
+
+
 
