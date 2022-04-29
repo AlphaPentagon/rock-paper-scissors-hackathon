@@ -54,10 +54,19 @@ function displayOutcome(outcome){
 
 //Calls all needed functions
 function main(){
-    let playerMove = getPlayerInput();
-    let computerMove = getComputerInput();
-    let result = getWinner(playerMove, computerMove);
+    let playerMove;
+    let computerMove;
+    let result;
+    let gamePlaying = true;
+
+    while(gamePlaying ===true){
+
+    playerMove = getPlayerInput();
+    computerMove = getComputerInput();
+    result = getWinner(playerMove, computerMove);
     displayOutcome(result);
+    gamePlaying = confirmCheck();    
+    }
 
 };
 
@@ -65,14 +74,24 @@ function main(){
 
 // Generates a random computer move
 function getComputerInput() {
+
     let computerMoves = ["rock", "paper", "scissors"];   
     let randomNum = Math.floor(Math.random() * 3);
     console.log(computerMoves[randomNum]); // This is so we can view the computerMove in the console for testing
     return computerMoves[randomNum];
 }
 
+//Ticket 5
+
+//Checks if the player would like to keep playing 
+function confirmCheck(){
+    
+    return confirm("Do you wish to play again?")
+}
+
 //runs the program
 main();
+
 
 
 
