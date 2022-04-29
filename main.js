@@ -106,21 +106,34 @@ function getplayerName(){
     let alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 
     playerName = prompt("Please input your User Name. This should be no more than 10 characters and must start with a letter");
-while (approvedFirstLetter === false) {
-   for (let i = 0; i < alphabet.length; i++) {
-       if (alphabet[i] === playerName[0].toLowerCase()) {           
-           approvedFirstLetter = true;
-           return;
-       }        
-   }
-   playerName = prompt("Sorry that is not a valid User Name! The first character of your User Name MUST BE A LETTER!");
-}    
 
-    while(playerName.length>10){
-        playerName = prompt("Sorry that is not a valid User Name! Please input a User Name LESS THAN 10 CHARACTERS!");
-    }
+    
 
+        
+    playerName = prompt("Sorry that is not a valid User Name! The first character of your User Name MUST BE A LETTER!");
+       
+    playerName = prompt("Sorry that is not a valid User Name! Please input a User Name LESS THAN 10 CHARACTERS!");
     return playerName;
+}
+//checks name length
+function checkNameLength(){
+    
+    if(playerName.length<10){
+        return true;
+    }
+    return false;
+}
+
+//checks first character is a letter
+function checkFirstLetter(){
+
+    for (let i = 0; i < alphabet.length; i++) {
+            
+        if (alphabet[i] === playerName[0].toLowerCase()) {           
+            return true;                  
+        }   
+    }
+    return false;
 }
 
 //Bonus 1
