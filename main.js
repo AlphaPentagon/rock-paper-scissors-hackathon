@@ -27,13 +27,13 @@ function getWinner(player1, player2) {
         player1 === "scissors" && player2 === "paper" ||
         player1 === "paper" && player2 === "rock" ){            
             winCount++;
-            return `Your ${player1} beat computers ${player2}`;    
+            return `${playerName}'s ${player1} beat computers ${player2}`;    
     }else if(player1 === player2){
         drawCount++;
-        return `Your ${player1} drew against computers ${player2}`;
+        return `${playerName}'s ${player1} drew against computers ${player2}`;
     }else{
         loseCount++;
-        return `Your ${player1} lost against computers ${player2}`;
+        return `${playerName}'s ${player1} lost against computers ${player2}`;
     };    
 }
 /* used for ticket 2, not needed now
@@ -45,7 +45,7 @@ let result = getWinner("rock", "scissors");
 //To ask for player move
 function getPlayerInput(){
 
-    return prompt("Please input your move");
+    return prompt(`Please input your move ${playerName}`);
 };
 
 //Display outcome of game
@@ -59,6 +59,7 @@ let gameCount = 0;
 let winCount = 0;
 let loseCount = 0;
 let drawCount = 0;
+let playerName;
 
 function main(){
     let playerMove;
@@ -69,6 +70,7 @@ function main(){
 
     while(gamePlaying ===true){
 
+    getplayerName();
     playerMove = getPlayerInput();
     computerMove = getComputerInput();
     result = getWinner(playerMove, computerMove);
@@ -93,7 +95,19 @@ function getComputerInput() {
 //Checks if the player would like to keep playing 
 function confirmCheck(){
     
-    return confirm(`Games played: ${gameCount}\nWins: ${winCount}\nLosses: ${loseCount}\nDraws: ${drawCount}\nDo you wish to play again?`)
+    return confirm(`Games played: ${gameCount}\nWins: ${winCount}\nLosses: ${loseCount}\nDraws: ${drawCount}\nDo you wish to play again ${playerName}?`)
+}
+
+//Ticket 7 
+function getplayerName(){
+
+    playerName = prompt("Please input your User Name. This should be no more than 10 characters");
+
+    while(playerName.length>10){
+        playerName = prompt("Sorry that is not a valid User Name! Please input a User Name LESS THAN 10 CHARACTERS!");
+    }
+
+    return playerName;
 }
 
 //runs the program
