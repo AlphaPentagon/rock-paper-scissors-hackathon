@@ -22,17 +22,19 @@ if( playerMove === "rock" && computerMove === "scissors"){
 //Ticket 2
 //Works out who wins
 function getWinner(player1, player2) {
-    if( player1 === "rock" && player2 === "scissors"){
-        return 1;
-    }else if( player1 === "scissors" && player2 === "paper"){
-        return 1;
-    }else if( player1 === "paper" && player2 === "rock"){
-        return 1;
+    gameCount++;
+    if( player1 === "rock" && player2 === "scissors" ||
+        player1 === "scissors" && player2 === "paper" ||
+        player1 === "paper" && player2 === "rock" ){            
+            winCount++;
+            return `Your ${player1} beat computers ${player2}`;    
     }else if(player1 === player2){
-        return 0;
+        drawCount++;
+        return `Your ${player1} drew against computers ${player2}`;
     }else{
-        return -1;
-    };
+        loseCount++;
+        return `Your ${player1} lost against computers ${player2}`;
+    };    
 }
 /* used for ticket 2, not needed now
 let result = getWinner("rock", "scissors");
@@ -53,11 +55,17 @@ function displayOutcome(outcome){
 };
 
 //Calls all needed functions
+let gameCount = 0;
+let winCount = 0;
+let loseCount = 0;
+let drawCount = 0;
+
 function main(){
     let playerMove;
     let computerMove;
     let result;
     let gamePlaying = true;
+    
 
     while(gamePlaying ===true){
 
@@ -75,10 +83,9 @@ function main(){
 // Generates a random computer move
 function getComputerInput() {
 
-    let computerMoves = ["rock", "paper", "scissors"];   
-    let randomNum = Math.floor(Math.random() * 3);
-    console.log(computerMoves[randomNum]); // This is so we can view the computerMove in the console for testing
-    return computerMoves[randomNum];
+    let possibleMoves = ["rock", "paper", "scissors"];   
+    let randomNum = Math.floor(Math.random() * 3);    
+    return possibleMoves[randomNum];
 }
 
 //Ticket 5
@@ -86,7 +93,7 @@ function getComputerInput() {
 //Checks if the player would like to keep playing 
 function confirmCheck(){
     
-    return confirm("Do you wish to play again?")
+    return confirm(`Games played: ${gameCount}\nWins: ${winCount}\nLosses: ${loseCount}\nDraws: ${drawCount}\nDo you wish to play again?`)
 }
 
 //runs the program
