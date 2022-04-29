@@ -1,18 +1,14 @@
-let playerMove = "rock";
-let computerMove = "paper";
+let playerMove = "paper";
+let computerMove = "scissors";
 
 if( playerMove === "rock" && computerMove === "scissors"){
     console.log("player wins");
-}; 
-if( playerMove === "scissors" && computerMove === "paper"){
+}else if( playerMove === "scissors" && computerMove === "paper"){
     console.log("player wins");
-}; 
-if( playerMove === "paper" && computerMove === "rock"){
+}else if( playerMove === "paper" && computerMove === "rock"){
     console.log("player wins");
-}; 
-if(playerMove === computerMove){
+}else if(playerMove === computerMove){
     console.log("Its a draw");
-}
-else{
+}else{
     console.log("computer wins");
 };
