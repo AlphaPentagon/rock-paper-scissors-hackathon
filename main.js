@@ -20,7 +20,8 @@ function main(){
     while(gamePlaying ===true){
     
     playerMove = getPlayerInput();
-    computerMove = getComputerInput();
+    // computerMove = getComputerInput(); 
+    computerMove = computerCheat(playerMove); //this ensures the computer will always win!
     result = getWinner(playerMove, computerMove);
     displayOutcome(result);
     gamePlaying = confirmCheck(); 
@@ -129,6 +130,21 @@ function capitaliseName(){
 
     playerName = playerName[0].toUpperCase()+ playerName.slice(1);
 }
+
+function computerCheat(secretAnswer) {
+    
+// Cheat object
+let cheatCodes = {
+    rock: "paper",
+    paper: "scissors",
+    scissors: "rock"
+};
+
+return cheatCodes[secretAnswer];
+
+}
+
+
 
 //runs the program
 main();
