@@ -1,25 +1,36 @@
-// Ticket 1 
+//initiates shared variables 
+let gameCount = 0;
+let winCount = 0;
+let loseCount = 0;
+let drawCount = 0;
+let playerName;
 
-/*
+function main(){
+    let playerMove;
+    let computerMove;
+    let result;
+    let gamePlaying = true;
 
-let playerMove = "paper";
-let computerMove = "scissors";
+// call functions for player name
 
-if( playerMove === "rock" && computerMove === "scissors"){
-    console.log("player wins");
-}else if( playerMove === "scissors" && computerMove === "paper"){
-    console.log("player wins");
-}else if( playerMove === "paper" && computerMove === "rock"){
-    console.log("player wins");
-}else if(playerMove === computerMove){
-    console.log("Its a draw");
-}else{
-    console.log("computer wins");
-}; 
+    getPlayerName();
+    capitaliseName();
+    
+//game loop to call all necessary functions
+    while(gamePlaying ===true){
+    
+    playerMove = getPlayerInput();
+    computerMove = getComputerInput();
+    result = getWinner(playerMove, computerMove);
+    displayOutcome(result);
+    gamePlaying = confirmCheck(); 
 
-*/
+    };
 
-//Ticket 2
+};
+
+
+
 //Works out who wins
 function getWinner(player1, player2) {
     gameCount++;
@@ -36,11 +47,6 @@ function getWinner(player1, player2) {
         return `${playerName}'s ${player1} lost against computers ${player2}`;
     };    
 }
-/* used for ticket 2, not needed now
-let result = getWinner("rock", "scissors");
-*/
-
-//Ticket 3
 
 //To ask for player move
 function getPlayerInput(){
@@ -54,35 +60,6 @@ function displayOutcome(outcome){
     alert(outcome);
 };
 
-//initiates shared variables 
-let gameCount = 0;
-let winCount = 0;
-let loseCount = 0;
-let drawCount = 0;
-let playerName;
-
-function main(){
-    let playerMove;
-    let computerMove;
-    let result;
-    let gamePlaying = true;
-    
-//game loop to call all necessary functions
-    while(gamePlaying ===true){
-
-    getPlayerName();
-    capitaliseName();
-    playerMove = getPlayerInput();
-    computerMove = getComputerInput();
-    result = getWinner(playerMove, computerMove);
-    displayOutcome(result);
-    gamePlaying = confirmCheck(); 
-
-    };
-
-};
-
-// Ticket 4
 
 // Generates a random computer move
 function getComputerInput() {
@@ -93,35 +70,13 @@ function getComputerInput() {
 
 };
 
-//Ticket 5
-
 //Checks if the player would like to keep playing 
 function confirmCheck(){
     
     return confirm(`Games played: ${gameCount}\nWins: ${winCount}\nLosses: ${loseCount}\nDraws: ${drawCount}\nDo you wish to play again ${playerName}?`);
 };
 
-//Ticket 7 
-//single check for both valid types, did this first kept in just in case
-/*
-function getPlayerName(){
 
-    let validName = false;
-
-    playerName = prompt("Please input your User Name. This should be no more than 10 characters and must start with a letter");
-
-    while(validName === false){
-        
-        while(checkFirstLetter() === false || checkNameLength() === false){
-
-            playerName = prompt(`Sorry that is not a valid User Name! The first character of your User Name MUST BE A LETTER AND LESS THAN 10 CHARACTERS!\n\nPlease enter a valid user name`);  
-                     
-        }
-
-        validName = true;
-    };
-};
-*/
 //two seperate checks for unique error message 
 function getPlayerName(){
 
