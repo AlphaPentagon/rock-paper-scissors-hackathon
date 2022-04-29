@@ -20,7 +20,7 @@ if( playerMove === "rock" && computerMove === "scissors"){
 */
 
 //Ticket 2
-
+//Works out who wins
 function getWinner(player1, player2) {
     if( player1 === "rock" && player2 === "scissors"){
         return 1;
@@ -34,5 +34,33 @@ function getWinner(player1, player2) {
         return -1;
     };
 }
-
+/* used for ticket 2, not needed now
 let result = getWinner("rock", "scissors");
+*/
+
+//Ticket 3
+
+//To ask for player move
+function getPlayerInput(){
+
+    return prompt("Please input your move");
+};
+
+//Display outcome of game
+function displayOutcome(outcome){
+
+    alert(outcome);
+};
+
+//Calls all needed functions
+function main(){
+
+    let input = getPlayerInput();
+    let result = getWinner(input, "rock");
+    displayOutcome(result);
+
+};
+
+//runs the program
+main();
+
