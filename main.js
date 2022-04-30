@@ -126,23 +126,40 @@ function checkFirstLetter(){
     return false;
 };
 
+// capitalises the first letter of the username
+
 function capitaliseName(){
 
     playerName = playerName[0].toUpperCase()+ playerName.slice(1);
 }
 
-function computerCheat(secretAnswer) {
+// ensures the computer wins only half the time
+
+function computerCheat(playerMove) {
     
 // Cheat object
-let cheatCodes = {
-    rock: "paper",
-    paper: "scissors",
-    scissors: "rock"
+    let cheatCodes = [ 
+        {
+            rock: "paper",
+            paper: "scissors",
+            scissors: "rock"
+        },
+        {
+            rock: "scissors",
+            paper: "rock",
+            scissors: "paper"
+        }
+    ];
+
+    // if gameCount is divisible by 2 then computer wins, else computer loses
+
+    if (gameCount % 2) {
+        return cheatCodes[0][playerMove];
+    } else {
+        return cheatCodes[1][playerMove];
+    };
+
 };
-
-return cheatCodes[secretAnswer];
-
-}
 
 
 
