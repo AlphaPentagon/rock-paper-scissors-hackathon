@@ -21,7 +21,7 @@ function main(){
     
     playerMove = getPlayerInput();
     // computerMove = getComputerInput(); 
-    computerMove = computerCheat(playerMove); //this ensures the computer will always win!
+    computerMove = fixOdds(playerMove); //this ensures the computer will always win!
     result = getWinner(playerMove, computerMove);
     displayOutcome(result);
     gamePlaying = confirmCheck(); 
@@ -63,7 +63,7 @@ function displayOutcome(outcome){
 
 
 // Generates a random computer move
-function getComputerInput() {
+function computerRandom() {
 
     let possibleMoves = ["rock", "paper", "scissors"];   
     let randomNum = Math.floor(Math.random() * 3);    
@@ -121,7 +121,7 @@ function checkFirstLetter(){
             
         if (alphabet[i] === playerName[0].toLowerCase()) {           
             return true;                  
-        } ;  
+        };  
     };
     return false;
 };
@@ -133,33 +133,55 @@ function capitaliseName(){
     playerName = playerName[0].toUpperCase()+ playerName.slice(1);
 }
 
-// ensures the computer wins only half the time
+// ensures the computer wins 
 
-function computerCheat(playerMove) {
+function computerWin(playerMove) {
     
-// Cheat object
-    let cheatCodes = [ 
+    let cheatCodes =
         {
             rock: "paper",
             paper: "scissors",
             scissors: "rock"
-        },
-        {
-            rock: "scissors",
-            paper: "rock",
-            scissors: "paper"
-        }
-    ];
+        };
 
-    // if gameCount is divisible by 2 then computer wins, else computer loses
-
-    if (gameCount % 2) {
-        return cheatCodes[0][playerMove];
-    } else {
-        return cheatCodes[1][playerMove];
+    return cheatCodes[playerMove];
     };
+        
+    
 
-};
+    // if gameCount is divisible by n then computer wins, else computer loses e.g.
+    // e.g. 2 for 50%, 4 for 25%, 
+
+    // if (gameCount % 10) {
+    //     return cheatCodes[1][playerMove];
+    // } else {
+    //     return cheatCodes[0][playerMove];
+    // };
+
+
+// ensures the computer loses
+
+function computerLose(playerMove) {
+    let cheatLoseCodes = {
+        rock: "scissors",
+        paper: "rock",
+        scissors: "paper"
+    }
+
+    return cheatLoseCodes[playerMove];
+}
+
+// ensures the computer wins only half of the time
+
+function fixOdds(playerMove) {
+    if (winCount === loseCount) {
+        return computerRandom();
+    } else if (winCount > loseCount) {
+        return computerWin(playerMove)
+    }else {
+        return computerLose(playerMove);
+    }
+}
 
 
 
