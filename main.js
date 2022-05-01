@@ -18,8 +18,10 @@ function main(){
     
 //game loop to call all necessary functions
     while(gamePlaying ===true){
+
     
     playerMove = getPlayerInput();
+    // checkPlayerInput(playerMove);       
     // computerMove = getComputerInput(); 
     computerMove = fixOdds(playerMove); //this ensures the computer will always win!
     result = getWinner(playerMove, computerMove);
@@ -54,6 +56,22 @@ function getPlayerInput(){
 
     return prompt(`Please input your move ${playerName}`);
 };
+
+// Checks if the player has entered a valid move
+
+function checkPlayerInput(playerMove) {
+    let possiblePlayerMoves = ["rock", "paper", "scissors"];
+    for (let i = 0; i < possiblePlayerMoves.length; i++) {
+        if (playerMove === possiblePlayerMoves[i]) {
+            return true;
+        }
+    }
+    alert("That is not a valid move - please enter 'rock', 'paper' or 'scissors");
+    playerMove = getPlayerInput();
+}
+   
+
+
 
 //Display outcome of game
 function displayOutcome(outcome){
@@ -98,7 +116,7 @@ function getPlayerName(){
         
         };
         if(checkFirstLetter() === true && checkNameLength() === true){
-            return
+            return;
         };
     };
 };
@@ -171,25 +189,35 @@ function computerLose(playerMove) {
     return cheatLoseCodes[playerMove];
 }
 
-// ensures the computer wins only half of the time
+// ensures the computer wins n% amount of times, but not always on the same turn
+// e.g. computer will win 1 in 4 rounds, but not every 4th round
+// this is to give the play some depth
 
 function fixOdds(playerMove) {
-    if (winCount === loseCount) {
+    if (gameCount === 0) {
         return computerRandom();
-    } else if (winCount > loseCount) {
-        return computerWin(playerMove)
-    }else {
+        // if the computer has won less then 25% of the number of
+        // games played (ignoring draws)
+    } else if ((loseCount / (gameCount - drawCount)) * 100 < 25) {
+
+        // if above is true
+        // determines if the next game must be won to ensure that computer
+        // always wins n% of times
+        if ((gameCount - drawCount + loseCount + 1) % 4 === 0) {
+            return computerWin(playerMove);
+        }
+
+        // checks if computer has won more than 25% of the number of games
+        // played (ignoring draws) and if true then ensures the computer loses
+    } else if ((loseCount / (gameCount - drawCount)) * 100 > 25) {
         return computerLose(playerMove);
-    }
-}
 
-
+        // otherwise returns a random computer result
+    } else {
+        return computerRandom();
+    }  
+}   
 
 //runs the program
 main();
-
-
-
-
-
 
