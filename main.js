@@ -17,16 +17,18 @@ function main(){
     capitaliseName();
     
 //game loop to call all necessary functions
-    while(gamePlaying ===true){
-
+    while(gamePlaying ===true){   
     
-    playerMove = getPlayerInput();
-    // checkPlayerInput(playerMove);       
+    
+    while (checkPlayerInput(playerMove) === false) {        
+        playerMove = getPlayerInput();
+    };        
     // computerMove = getComputerInput(); 
     computerMove = fixOdds(playerMove); //this ensures the computer will always win!
     result = getWinner(playerMove, computerMove);
     displayOutcome(result);
-    gamePlaying = confirmCheck(); 
+    gamePlaying = confirmCheck();
+    playerMove = ""; 
 
     };
 
@@ -53,8 +55,7 @@ function getWinner(player1, player2) {
 
 //To ask for player move
 function getPlayerInput(){
-
-    return prompt(`Please input your move ${playerName}`);
+    return prompt(`Please input your move ${playerName} - 'rock', 'paper' or 'scissors'`);
 };
 
 // Checks if the player has entered a valid move
@@ -62,12 +63,12 @@ function getPlayerInput(){
 function checkPlayerInput(playerMove) {
     let possiblePlayerMoves = ["rock", "paper", "scissors"];
     for (let i = 0; i < possiblePlayerMoves.length; i++) {
-        if (playerMove === possiblePlayerMoves[i]) {
+        if (possiblePlayerMoves[i] === playerMove) {
             return true;
         }
     }
-    alert("That is not a valid move - please enter 'rock', 'paper' or 'scissors");
-    playerMove = getPlayerInput();
+    // playerMove = prompt("Please enter 'rock', 'paper' or 'scissors'");    
+    return false;    
 }
    
 
@@ -161,21 +162,9 @@ function computerWin(playerMove) {
             paper: "scissors",
             scissors: "rock"
         };
-
-    return cheatCodes[playerMove];
-    };
-        
     
-
-    // if gameCount is divisible by n then computer wins, else computer loses e.g.
-    // e.g. 2 for 50%, 4 for 25%, 
-
-    // if (gameCount % 10) {
-    //     return cheatCodes[1][playerMove];
-    // } else {
-    //     return cheatCodes[0][playerMove];
-    // };
-
+    return cheatCodes[playerMove];
+    };    
 
 // ensures the computer loses
 
@@ -185,7 +174,7 @@ function computerLose(playerMove) {
         paper: "rock",
         scissors: "paper"
     }
-
+    
     return cheatLoseCodes[playerMove];
 }
 
