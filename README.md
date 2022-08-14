@@ -6,4 +6,9 @@ At the end of our first week on the School of Code bootcamp, we were tasked with
 
 As bonus tasks, we were asked to validate the player name and fix the odds so that the computer wins a predfined amount of times.
 
+To run:
+
+- Clone the repo
+- open index.html in your preferred web browser
+
 Credits: Craig Summers and Ben Greenwood
